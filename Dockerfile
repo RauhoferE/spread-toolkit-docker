@@ -1,9 +1,8 @@
 FROM debian:bullseye-slim
 
 # Install 32-bit compatibility libraries and tar
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -y libc6:i386 libstdc++6:i386 tar && \
+RUN dpkg apt-get update && \
+    apt-get install -y libc6 libstdc++6 tar && \
     rm -rf /var/lib/apt/lists/*
 
 # Create directory for Spread
