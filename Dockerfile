@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 
 # Install 32-bit compatibility libraries and tar
-RUN dpkg apt-get update && \
+RUN apt-get update && \
     apt-get install -y libc6 libstdc++6 tar && \
     rm -rf /var/lib/apt/lists/*
 
