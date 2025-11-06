@@ -1,9 +1,10 @@
-FROM debian:bullseye-slim
+FROM archlinux:latest
 
 # Install 32-bit compatibility libraries and tar
-RUN apt-get update && \
-    apt-get install -y libc6 libstdc++6 tar && \
-    rm -rf /var/lib/apt/lists/*
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm libnsl tar gzip && \
+    # Clean up the package cache to keep the image smaller (critical for Arch/Manjaro)
+    pacman -Scc --noconfirm
 
 # Create directory for Spread
 WORKDIR /opt
@@ -14,8 +15,8 @@ RUN tar -xzf spread-bin-4.0.0.tar.gz && \
     rm spread-bin-4.0.0.tar.gz
 
 # Create the 'spread' user and group
-RUN groupadd -r spread && \
-    useradd -r -g spread spread && \
+RUN groupadd spread && \
+    useradd -g spread -s /bin/sh -d /opt/spread-bin-4.0.0 spread && \
     chown -R spread:spread /opt/spread-bin-4.0.0
 
 # Set environment variables
