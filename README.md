@@ -2,6 +2,10 @@
 
 This guide explains how to run the **Spread Toolkit** using Docker and Docker Compose. It covers network setup, container IP assignment, configuration, and port mapping.
 
+## Info
+
+This image is for x64 based cpus and based on the archlinux image.
+
 ## 1. Create a Docker Network
 
 Create a dedicated Docker network:
@@ -42,7 +46,7 @@ version: "3.8"
 services:
   spread-toolkit:
     container_name: spread-toolkit
-    image: ghcr.io/p4trickweiss/spread-toolkit:4.0.0
+    image: rauhofere/spread-toolkit-docker
     ports:
       - 4803:4803
     volumes:
