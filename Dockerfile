@@ -20,7 +20,7 @@ RUN groupadd -r spread && \
 
 # Set environment variables
 ENV SPREAD_HOME=/opt/spread-bin-4.0.0
-ENV PATH=$SPREAD_HOME/bin/i686-pc-linux-gnu:$PATH
+ENV PATH=$SPREAD_HOME/bin/x64:$PATH
 
 # Copy and configure spread.conf
 COPY conf/spread.conf /etc/spread/spread.conf

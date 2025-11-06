@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag rauhofere/spread-toolkit-docker:latest
+    - name: Push Docker image to the Hub
+      run: |
+        docker login -u rauhofere -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        docker push rauhofere/spread-toolkit-docker:latest
